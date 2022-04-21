@@ -3,7 +3,7 @@ name: osx-release
 on:
   workflow_dispatch:
   push:
-    branches: [ main, release ]
+    branches: [ main, release, migrate-release-workflows ]
 
 jobs:
   build-and-lay-out:
@@ -13,6 +13,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0 # Indicate full history so Nerdbank.GitVersioning works.
+        ref: migrate-release-workflows
 
     - name: Set up dotnet
       uses: actions/setup-dotnet@v2
@@ -54,6 +55,8 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v3
+      with:
+        ref: migrate-release-workflows
 
     - name: Set up python
       uses: actions/setup-python@v2
@@ -123,6 +126,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0 # Indicate full history so Nerdbank.GitVersioning works.
+        ref: migrate-release-workflows
     
     - name: Set up dotnet
       uses: actions/setup-dotnet@v2
@@ -162,6 +166,8 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v3
+      with:
+        ref: migrate-release-workflows
 
     - name: Download unsigned package file
       uses: actions/download-artifact@v2
@@ -231,6 +237,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0 # Indicate full history so Nerdbank.GitVersioning works.
+        ref: migrate-release-workflows
     
     # Install Nerdbank.GitVersioning
     - uses: dotnet/nbgv@master
